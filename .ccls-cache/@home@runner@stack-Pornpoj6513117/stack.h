@@ -4,7 +4,7 @@
 #include "node.h"
 typedef struct {
 	NodePtr top;
-	int size;
+	char size;
 }Stack;
 
 typedef Stack * StackPtr;
@@ -18,22 +18,22 @@ void push(StackPtr s, char value){
       s->size++;
     }  
 }
-  int pop(StackPtr s){ //pop
+  char pop(StackPtr s){ //pop
   NodePtr t =s->top;
       if(s->size>0){
-      int value= t->data; 
+      char value= t->data; 
       s->top=t->nextPtr;
         s->size--;
         free(t);
         return value;
         }
-        printf("Empty stack");
+        
         return 0;
     }
 
 void pop_all(StackPtr s){
   while(s->top){ //s->size>0
-    printf("%d\n",pop(s));
+    pop(s);
   }
  }
 #endif

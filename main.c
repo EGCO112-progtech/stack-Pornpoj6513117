@@ -5,19 +5,53 @@
 
 int main(int argc, char **argv){
   
-  int i,N,j;
+  int i,N,j,error=0;
   Stack s;
   s.top=NULL;
   s.size=0;
-  NodePtr top=NULL;
-  
   for(i=1;i<argc;i++){
-    push(&s,atoi(argv[i]));
+    for(j=0;j<strlen(argv[i]);j++){
+      switch(argv[i][j]){
+        case'{':
+        case'[':  push(&s,(argv[i][j]));
+                  break;
+        case '}': if(pop(&s)!='{')  error=1; break;
+        case ']': if(pop(&s)!='[')  error=1; break;
+        }  
+      if(error==1) break;
+      }
+    if(s.size>0){
+      printf("arfv %d: Incorrect too many open parenhesis\n",i);
+      pop_all(&s);
+      }
+    else if(error==0) printf("argv %d: Correct\n",i);
+    else printf("argv %d: Mismatch\n",i);
+    }
+  
+
+  
+
+  
+    
   }
 
-  pop_all(&s);
- 
+
+
+
+
+
+
+
+
+//NodePtr top=NULL;
   
+  //for(i=1;i<argc;i++){
+   // push(&s,atoi(argv[i]));
+  
+
+  //pop_all(&s);
+
+
 
  /*
  Stack s;
@@ -36,5 +70,4 @@ int main(int argc, char **argv){
 
 
 
-   return 0;
-}
+  
